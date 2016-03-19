@@ -11,10 +11,11 @@ body, html {
 
 /* animations */
 @keyframes blink {
-	0%	{ color: black; }
+	0%	{ color: #eeeeee; }
 	1%	{ color: transparent; }
 	50%	{ color: transparent; }
-	51%	{ color: black; }
+	51%	{ color: #eeeeee; }
+	100% { color: #eeeeee; }
 }
 
 /* other tag styles */
@@ -49,7 +50,7 @@ div#title::before {
 	content: "~$ ";
 }
 div#title::after {
-	content: "\2588";
+	content: "\2005\2589";
 	animation: blink 2s infinite;
 	animation-delay: 3s;
 }
