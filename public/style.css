@@ -1,0 +1,49 @@
+/* main styles */
+* {
+	box-sizing: border-box;
+	font-family: verdana, sans-serif;
+	font-size: 16px;
+}
+body, html {
+	margin: 0;
+	padding: 0;
+}
+
+/* other tag styles */
+a {
+	text-decoration: none;
+	border-bottom: 1px dotted black;
+}
+
+/* classes */
+.animate {
+	transition: all .2s;
+}
+.code {
+	font-family: courier new, monospace;
+}
+
+/* specific element styles */
+/* header styles */
+div#header {
+	height: 100px;
+}
+div#title {
+	height: 60px;
+	font-size: 40px;
+	padding: 5px;
+}
+nav#links {
+	display: flex;
+	height: 40px;
+}
+nav#links > a {
+	flex-grow: 1;
+	text-align: center;
+	border: none;
+	font-size: 20px;
+	padding: 5px;
+}
+nav#links > a:hover {
+	background-color: #eee;
+}
