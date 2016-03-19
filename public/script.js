@@ -8,7 +8,7 @@ $(function() {
 	var t = setInterval(function() {
 		titleElem.append(title.charAt(titleIndex++));
 		if(titleIndex == title.length)
-			t.clearInterval();
+			clearInterval(t);
 	}, 100);
 
 });
