@@ -21,6 +21,7 @@ body, html {
 a {
 	text-decoration: none;
 	border-bottom: 1px dotted black;
+	outline: none;
 }
 
 /* classes */
@@ -38,26 +39,37 @@ div#header {
 }
 div#title {
 	height: 60px;
+	line-height: 60px;
 	font-size: 40px;
-	padding: 5px;
 	font-family: courier new;
+	background-color: black;
+	color: #eeeeee;
+}
+div#title::before {
+	content: "~$ ";
 }
 div#title::after {
 	content: "_";
 	animation: blink 2s infinite;
-	animation-delay: 2s;
+	animation-delay: 3s;
 }
 nav#links {
 	display: flex;
 	height: 40px;
+	background-color: black;
 }
 nav#links > a {
 	flex-grow: 1;
 	text-align: center;
 	border: none;
+	line-height: 40px;
 	font-size: 20px;
-	padding: 5px;
+	color: #eee;
+	font-family: courier new;
+}
+nav#links > a::before {
+	content: "cd ";
 }
 nav#links > a:hover {
-	background-color: #eee;
+	text-decoration: underline;
 }
