@@ -49,7 +49,7 @@ div#title::before {
 	content: "~$ ";
 }
 div#title::after {
-	content: "_";
+	content: "\2588";
 	animation: blink 2s infinite;
 	animation-delay: 3s;
 }
@@ -69,6 +69,7 @@ nav#links > a {
 }
 nav#links > a::before {
 	content: "cd ";
+	text-decoration: none !important;
 }
 nav#links > a:hover {
 	text-decoration: underline;
