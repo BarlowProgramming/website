@@ -42,4 +42,15 @@ $(function() {
 		$("div#title").addClass("nodelay");
 	}
 
+	// change page contents without load if pointing to own website
+	$("nav > a").click(function(e) {
+		var href = $(this).attr("href");
+		$("div#container").load(href + " div#container");
+		$.get(href, function(data) {
+			$("title").text(/<title>(.+?)<\/title>/.exec(data)[1]);
+		});
+		window.history.pushState("", "", "/" + (href == "/" ? "" : href));
+		e.preventDefault();
+	});
+
 });

@@ -11,6 +11,9 @@ body, html {
 	min-height: 500px;
 	min-width: 700px;
 }
+body {
+	padding-top: 150px;
+}
 
 /* animations */
 @keyframes blink {
@@ -40,7 +43,13 @@ a {
 /* header styles */
 div#header {
 	height: 150px;
+	width: 100%;
 	background-color: #222222;
+	position: fixed;
+	top: 0;
+}
+div#container {
+	height: 100%;
 }
 div#title {
 	height: 100px;
@@ -86,7 +95,7 @@ nav#links > a:hover {
 }
 /* main page */
 div#introduction {
-	height: calc(100% - 150px);	
+	height: 100%;	
 	overflow: hidden;
 }
 div#introductionText {
