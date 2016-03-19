@@ -15,7 +15,7 @@ $(function() {
 	// add header
 	var header = `
 	<div id="header">
-		<div id="title">JBHS Programming Team</div>	
+		<div id="title">JBHS Programming Club</div>	
 		<nav id="links">
 			<a class="animate" href="/">Home</a>
 			<a class="animate" href="projects.html">Projects</a>
