@@ -16,7 +16,7 @@ $(function() {
 	<div id="header">
 		<div id="title">JBHS Programming Team</div>	
 		<nav id="links">
-			<a class="animate" href="index.html">Home</a>
+			<a class="animate" href="/">Home</a>
 			<a class="animate" href="projects.html">Projects</a>
 			<a class="animate" href="team.html">Team</a>
 			<a class="animate" href="contact.html">Contact</a>
