@@ -26,15 +26,20 @@ $(function() {
 	`;
 	$("body").prepend(header);
 
-	// title animation
-	var titleElem = $("div#title");
-	var title = titleElem.text();
-	var titleIndex = 0;
-	titleElem.empty();
-	var t = setInterval(function() {
-		titleElem.append(title.charAt(titleIndex++));
-		if(titleIndex == title.length)
-			clearInterval(t);
-	}, 100);
+	// title animation (only if cookie has not been set)
+	if(!/visited=1/.test(document.cookie)) {
+		var titleElem = $("div#title");
+		var title = titleElem.text();
+		var titleIndex = 0;
+		titleElem.empty();
+		var t = setInterval(function() {
+			titleElem.append(title.charAt(titleIndex++));
+			if(titleIndex == title.length)
+				clearInterval(t);
+		}, 100);
+		document.cookie = "visited=1";
+	} else {
+		$("div#title").addClass("nodelay");
+	}
 
 });
