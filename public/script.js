@@ -13,14 +13,17 @@ $(function() {
 	$("head").append(metas);
 
 	// add header
+	var links = `
+		<a class="animate" href="/">Home</a>
+		<a class="animate" href="/projects.html">Projects</a>
+		<a class="animate" href="/team.html">Team</a>
+		<a class="animate" href="/contact.html">Contact</a>	
+	`;
 	var header = `
 	<div id="header">
 		<div id="title">JBHS Programming Club</div>	
 		<nav id="links">
-			<a class="animate" href="/">Home</a>
-			<a class="animate" href="projects.html">Projects</a>
-			<a class="animate" href="team.html">Team</a>
-			<a class="animate" href="contact.html">Contact</a>
+	` + links + `
 		</nav>
 	</div>
 	`;
@@ -41,15 +44,21 @@ $(function() {
 	} else {
 		$("div#title").addClass("nodelay");
 	}
+	
+	// change current link
+	$("nav#links > a[href='" + window.location.pathname + "']").text("current");	
 
 	// change page contents without load if pointing to own website
-	$("nav > a").click(function(e) {
+	$(document).on("click", "nav#links > a", function(e) {
 		var href = $(this).attr("href");
 		$("div#container").load(href + " div#container");
 		$.get(href, function(data) {
 			$("title").text(/<title>(.+?)<\/title>/.exec(data)[1]);
 		});
-		window.history.pushState("", "", "/" + (href == "/" ? "" : href));
+		$("nav#links").html(links);
+		window.history.pushState("", "", href);
+		console.log(window.location.pathname);
+		$("nav#links > a[href='" + window.location.pathname + "']").text("current");	
 		e.preventDefault();
 	});
 
