@@ -13,14 +13,17 @@ $(function() {
 	$("head").append(metas);
 
 	// add header
+	var links = `
+		<a href="/">Home</a>
+		<a href="/projects/">Projects</a>
+		<a href="/team/">Team</a>
+		<a href="/contact/">Contact</a>
+	`;
 	var header = `
 	<div id="header">
 		<div id="title">JBHS Programming Club</div>
 		<nav id="links">
-			<a class="animate" href="/">Home</a>
-			<a class="animate" href="/projects/">Projects</a>
-			<a class="animate" href="/team/">Team</a>
-			<a class="animate" href="/contact/">Contact</a>
+	` + links + `
 		</nav>
 	</div>
 	`;
@@ -39,18 +42,53 @@ $(function() {
 		}, 100);
 		document.cookie = "visited=1";
 	} else {
-		$("div#title").addClass("nodelay");
+		$("div#title").addClass("noDelay");
 	}
 
+	// change current link
+	var highlightCurrent = function() {
+		var current = $("nav#links > a[href='" + window.location.pathname + "']");
+		current.addClass("currentPage");
+		current.removeAttr("href");
+	};
+	highlightCurrent();
+
 	// change page contents without load if pointing to own website
-	$("nav > a").click(function(e) {
+	$(document).on("click", "nav#links > a", function(e) {
 		var href = $(this).attr("href");
-		$("div#container").load(href + " div#container");
+		$("div#container").load(href + " div#container > *", function() {
+			// call resizeFunction() just in case formatting needs to happen
+			resizeFunction();
+		});
+		// GET request for title because load() cannot do it (why?)
 		$.get(href, function(data) {
 			$("title").text(/<title>(.+?)<\/title>/.exec(data)[1]);
 		});
-		window.history.pushState("", "", "/" + (href == "/" ? "" : href));
+		$("nav#links").html(links);
+		// change URL without refresh
+		window.history.pushState("", "", href);
+		highlightCurrent();
 		e.preventDefault();
+	});
+
+	var $window = $(window);
+	// functions to do on resize (and load)
+	var resizeFunction = function() {
+		var winHeight = $window.height();
+		var winWidth = $window.width();
+		// auto-set height of introduction piece in index.html
+		// window.innerHeight is necessary here, instead of $(window).height
+		// because it doesn't factor in scrollbars, which may mess with it on the initial load
+		$("div#introduction").css({height: window.innerHeight-150});
+	};
+	$window.resize(resizeFunction).resize();
+
+	// shorten header after scroll
+	var $navLinks = $("nav#links");
+	$window.scroll(function() {
+		$window.scrollTop() > 100 ?
+			$navLinks.addClass("fixed") :
+			$navLinks.removeClass("fixed");
 	});
 
 });
