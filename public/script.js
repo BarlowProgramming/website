@@ -14,14 +14,14 @@ $(function() {
 
 	// add header
 	var links = `
-		<a href="/">Home</a>
-		<a href="/projects/">Projects</a>
-		<a href="/team/">Team</a>
-		<a href="/contact/">Contact</a>
+		<a class="noSelect" href="/">Home</a>
+		<a class="noSelect" href="/projects/">Projects</a>
+		<a class="noSelect" href="/team/">Team</a>
+		<a class="noSelect" href="/contact/">Contact</a>
 	`;
 	var header = `
 	<div id="header">
-		<div id="title">JBHS Programming Club</div>
+		<div id="title" class="noSelect" >JBHS Programming Club</div>
 		<nav id="links">
 	` + links + `
 		</nav>
