@@ -8,7 +8,7 @@ $(function() {
 	<meta name="author" content="Jonathan Lam <jlam55555@gmail.com>" />
 	<link rel="icon" type="img/x-icon" href="favicon.ico" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
-	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" />
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic" />
 	`;
 	$("head").append(metas);
 
