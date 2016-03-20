@@ -45,16 +45,44 @@ $(function() {
 		$("div#title").addClass("noDelay");
 	}
 
-	// change current link
+	// get mouse position (for special animations -- see below)
+	var mouseX = 0, mouseY = 0;
+	$(document).on("mousemove", function(e) {
+		mouseX = e.pageX;
+		mouseY = e.pageY;
+	});
+
+	// make the active tab highlighted for emphasis
 	var highlightCurrent = function() {
 		var current = $("nav#links > a[href='" + window.location.pathname + "']");
-		current.addClass("currentPage");
+		setTimeout(function() {current.addClass("currentPage")}, 1);
 		current.removeAttr("href");
+		// Google-Material-ripple-effect-like animation 
+		var currentMouseY = mouseY, currentMouseX = mouseX;
+		var ripple = $("<div>");
+		var toRadius = current.width();
+		ripple.addClass("ripple");
+		ripple.css({
+			top: currentMouseY - current.offset().top,
+			left: currentMouseX - current.offset().left,
+			height: 0,
+			width: 0
+		});
+		current.append(ripple);
+		ripple.animate({
+			height: toRadius*2,
+			width: toRadius*2,
+			opacity: 0,
+			top: "-=" + toRadius,
+			left: "-=" + toRadius
+		}, 1000, function() {
+			ripple.remove();
+		});
 	};
 	highlightCurrent();
 
 	// change page contents without load if pointing to own website
-	$(document).on("click", "nav#links > a", function(e) {
+	$(document).on("click", "nav#links > a:not(.currentPage)", function(e) {
 		var href = $(this).attr("href");
 		$("div#container").load(href + " div#container > *", function() {
 			// call resizeFunction() just in case formatting needs to happen
@@ -64,9 +92,9 @@ $(function() {
 		$.get(href, function(data) {
 			$("title").text(/<title>(.+?)<\/title>/.exec(data)[1]);
 		});
-		$("nav#links").html(links);
 		// change URL without refresh
 		window.history.pushState("", "", href);
+		$("nav#links").html(links);
 		highlightCurrent();
 		e.preventDefault();
 	});

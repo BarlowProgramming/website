@@ -103,7 +103,6 @@ nav#links {
 }
 nav#links.fixed {
 	width: 100%;
-	background-color: #222222;
 	position: fixed;
 	z-index: 2;
 	top: 0;
@@ -117,6 +116,10 @@ nav#links > a {
 	font-size: 20px;
 	color: #eeeeee;
 	font-family: courier new;
+	overflow: hidden;
+	position: relative;
+	background-color: #222222;
+	transition: background-color 1s;
 }
 nav#links > a::before {
 	content: "cd ../";
@@ -128,8 +131,8 @@ nav#links > a:hover {
 	text-decoration: underline;
 }
 nav#links > a.currentPage {
-	background-color: #111111;
 	font-weight: bold;
+	background-color: #333333;
 }
 nav#links > a.currentPage::before {
 	content: "~/";
@@ -143,6 +146,12 @@ nav#links > a.currentPage::after {
 }
 nav#links > a.currentPage:hover {
 	text-decoration: none;
+}
+div.ripple {
+	position: absolute;
+	background-color: white;
+	opacity: 0.5;
+	border-radius: 100%;
 }
 
 /* main page */
