@@ -8,12 +8,28 @@
 	<body>
 		<div id="container">
 			<div id="introduction">
-				<img id="coding" src="img/coding.jpg" />
+				<img id="introductionImage" src="img/carousel/0.png" />
 				<div id="introductionText">
-					<h1 class="code">echo "Hello, World!"</h1>
-					<p>We are Joel Barlow High School's Programming Club.</p>
+					<h1 class="code"></h1>
+					<p></p>
 				</div>
 			</div>
+			<script>
+				carousel([
+					{
+						title: 'echo "Hello, World!"',
+						description: "We are Joel Barlow High School's Programming Club."
+					},
+					{
+						title: "Dummy Text",
+						description: "Trying out this new carousel feature."
+					},
+					{
+						title: "Another Dummy Text Slide",
+						description: "I like this image but it's a bit small."
+					}
+				]);
+			</script>
 			<h1>Dummy Text</h1>
 			<h2>This is to show how content will be displayed, and to see how scrolling will work.</h2>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis non nunc imperdiet accumsan. Maecenas eget diam et nisi hendrerit rhoncus eu in lectus. Ut ultrices ut tortor in pretium. Proin interdum fermentum libero ut condimentum. Donec eu tincidunt erat, ac viverra orci. Donec felis leo, euismod vel consectetur vitae, vestibulum eu purus. Etiam consequat nisl a lectus pretium, ac lobortis est sagittis.</p>

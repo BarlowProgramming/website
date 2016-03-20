@@ -1,3 +1,7 @@
+// for use of "let"
+"use strict"
+
+// on document ready
 $(function() {
 
 	// add meta tags
@@ -120,3 +124,39 @@ $(function() {
 	});
 
 });
+
+// carousel() function for introduction carousel
+var loadImage;
+var carousel = function(data) {
+	var numImgs = data.length;
+	for(let i = 0; i < numImgs; i++) {
+		var carouselButton = $("<div>");
+		carouselButton.addClass("carouselButton").addClass("animate");
+		carouselButton.css({
+			left: "calc(50% - ((50px * " + numImgs + " - 25px) / 2) + 50px * " + i + ")"
+		});
+		carouselButton.click(function() {
+			loadImage(i);
+			clearInterval(carouselInterval);
+			carouselInterval = setInterval(moveCarousel, 5000);
+			currentImage = i;
+		});
+		$("div#introduction").append(carouselButton);
+	}
+	loadImage = function(id) {
+		$("img#introductionImage").attr("src", "img/carousel/" + id + ".png");
+		$("div#introductionText > h1").text(data[id].title);
+		$("div#introductionText > p").text(data[id].description);
+		$("div.carouselButton").removeClass("currentImage");
+		// jQuery doesn't support :nth-of-type() selector, so use 0-based :eq() instead
+		$("div.carouselButton:eq(" + id + ")").addClass("currentImage");
+	};
+	var currentImage = 0;
+	var moveCarousel = function() {
+		if(++currentImage >= numImgs)
+			currentImage = 0;
+		loadImage(currentImage);
+	};
+	var carouselInterval = setInterval(moveCarousel, 5000);
+	loadImage(0);
+};
