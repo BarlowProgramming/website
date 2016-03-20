@@ -14,10 +14,10 @@ $(function() {
 
 	// add header
 	var links = `
-		<a class="animate" href="/">Home</a>
-		<a class="animate" href="/projects.html">Projects</a>
-		<a class="animate" href="/team.html">Team</a>
-		<a class="animate" href="/contact.html">Contact</a>	
+		<a href="/">Home</a>
+		<a href="/projects.html">Projects</a>
+		<a href="/team.html">Team</a>
+		<a href="/contact.html">Contact</a>	
 	`;
 	var header = `
 	<div id="header">
@@ -71,15 +71,24 @@ $(function() {
 		e.preventDefault();
 	});
 
+	var $window = $(window);
 	// functions to do on resize (and load)
 	var resizeFunction = function() {
-		var winHeight = $(window).height();
-		var winWidth = $(window).width();
+		var winHeight = $window.height();
+		var winWidth = $window.width();
 		// auto-set height of introduction piece in index.html
 		// window.innerHeight is necessary here, instead of $(window).height
 		// because it doesn't factor in scrollbars, which may mess with it on the initial load
 		$("div#introduction").css({height: window.innerHeight-150});
 	};
-	$(window).resize(resizeFunction).resize();
+	$window.resize(resizeFunction).resize();
+
+	// shorten header after scroll
+	var $navLinks = $("nav#links");
+	$window.scroll(function() {
+		$window.scrollTop() > 100 ? 
+			$navLinks.addClass("fixed") :
+			$navLinks.removeClass("fixed");
+	});
 
 });
