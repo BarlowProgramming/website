@@ -28,7 +28,7 @@ $(function() {
 	</div>
 	`;
 	$("body").prepend(header);
-
+	
 	// title animation (only if cookie has not been set)
 	if(!/visited=1/.test(document.cookie)) {
 		var titleElem = $("div#title");
@@ -42,24 +42,44 @@ $(function() {
 		}, 100);
 		document.cookie = "visited=1";
 	} else {
-		$("div#title").addClass("nodelay");
+		$("div#title").addClass("noDelay");
 	}
 	
 	// change current link
-	$("nav#links > a[href='" + window.location.pathname + "']").text("current");	
+	var highlightCurrent = function() {
+		var current = $("nav#links > a[href='" + window.location.pathname + "']");
+		current.addClass("currentPage");
+		current.removeAttr("href");
+	};
+	highlightCurrent();
 
 	// change page contents without load if pointing to own website
 	$(document).on("click", "nav#links > a", function(e) {
 		var href = $(this).attr("href");
-		$("div#container").load(href + " div#container");
+		$("div#container").load(href + " div#container > *", function() {
+			// call resizeFunction() just in case formatting needs to happen
+			resizeFunction();
+		});
+		// GET request for title because load() cannot do it (why?)
 		$.get(href, function(data) {
 			$("title").text(/<title>(.+?)<\/title>/.exec(data)[1]);
 		});
 		$("nav#links").html(links);
+		// change URL without refresh
 		window.history.pushState("", "", href);
-		console.log(window.location.pathname);
-		$("nav#links > a[href='" + window.location.pathname + "']").text("current");	
+		highlightCurrent();	
 		e.preventDefault();
 	});
+
+	// functions to do on resize (and load)
+	var resizeFunction = function() {
+		var winHeight = $(window).height();
+		var winWidth = $(window).width();
+		// auto-set height of introduction piece in index.html
+		// window.innerHeight is necessary here, instead of $(window).height
+		// because it doesn't factor in scrollbars, which may mess with it on the initial load
+		$("div#introduction").css({height: window.innerHeight-150});
+	};
+	$(window).resize(resizeFunction).resize();
 
 });
