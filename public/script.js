@@ -91,9 +91,6 @@ $(function() {
 		$("div#container").load(href + " div#container > *", function() {
 			// call resizeFunction() just in case formatting needs to happen
 			resizeFunction();
-			// brute force clear all setIntervals() -- change later
-			for(var i = 0; i < 100; i++)
-				clearInterval(i);
 			$("<div style='display:none' />").load(href + " span#script", function() {
 				if($(this).text() != "") {
 					$.get($(this).text());
