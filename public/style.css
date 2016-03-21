@@ -7,8 +7,12 @@
 body, html {
 	margin: 0;
 	padding: 0;
-	min-height: 500px;
-	min-width: 700px;
+	/* 
+	 * considering smallest common screen size is 1024x768
+	 * and that this is the desktop site
+	 */
+	min-height: 700px;
+	min-width: 1000px;
 }
 body {
 	padding-top: 150px;
