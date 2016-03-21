@@ -15,6 +15,8 @@
 //   });
 // });
 
+alert("TESTING");
+
 var url = 'https://api.github.com/orgs/BarlowProgramming/members';
 $.get(url, function(users) {
   displayUsers(users)

@@ -91,6 +91,10 @@ $(function() {
 		$("div#container").load(href + " div#container > *", function() {
 			// call resizeFunction() just in case formatting needs to happen
 			resizeFunction();
+			$("<div style='display:none' />").load(href + " span#script", function() {
+				if($(this).text() != "")
+					$.getScript($(this).text());
+			});
 		});
 		// GET request for title because load() cannot do it (why?)
 		$.get(href, function(data) {

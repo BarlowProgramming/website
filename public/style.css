@@ -75,6 +75,9 @@ p {
 }
 
 /* specific element styles */
+span#script {
+	display: none;
+}
 /* header styles */
 div#header {
 	height: 150px;
