@@ -87,10 +87,11 @@ $(function() {
 
 	// change page contents without load if pointing to own website
 	$(document).on("click", "nav#links > a:not(.currentPage)", function(e) {
+		$(document).trigger("pageChange");
 		var href = $(this).attr("href");
 		$("div#container").load(href + " div#container > *", function() {
 			// call resizeFunction() just in case formatting needs to happen
-			resizeFunction();
+			resizeFunction();	
 			$("<div style='display:none' />").load(href + " span#script", function() {
 				if($(this).text() != "") {
 					$.get($(this).text());
@@ -162,6 +163,9 @@ var carousel = function(data) {
 			currentImage = 0;
 		loadImage(currentImage);
 	};
+	$(document).on("pageChange", function() {
+		clearTimeout(carouselInterval);
+	});
 	var carouselInterval = setInterval(moveCarousel, 5000);
 	loadImage(0);
 };
