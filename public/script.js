@@ -91,9 +91,13 @@ $(function() {
 		$("div#container").load(href + " div#container > *", function() {
 			// call resizeFunction() just in case formatting needs to happen
 			resizeFunction();
+			// brute force clear all setIntervals() -- change later
+			for(var i = 0; i < 100; i++)
+				clearInterval(i);
 			$("<div style='display:none' />").load(href + " span#script", function() {
-				if($(this).text() != "")
-					$.getScript($(this).text());
+				if($(this).text() != "") {
+					$.get($(this).text());
+				}
 			});
 		});
 		// GET request for title because load() cannot do it (why?)
@@ -130,7 +134,7 @@ $(function() {
 });
 
 // carousel() function for introduction carousel
-var loadImage;
+var loadImage, moveCarousel;
 var carousel = function(data) {
 	var numImgs = data.length;
 	for(let i = 0; i < numImgs; i++) {
@@ -156,7 +160,7 @@ var carousel = function(data) {
 		$("div.carouselButton:eq(" + id + ")").addClass("currentImage");
 	};
 	var currentImage = 0;
-	var moveCarousel = function() {
+	moveCarousel = function() {
 		if(++currentImage >= numImgs)
 			currentImage = 0;
 		loadImage(currentImage);

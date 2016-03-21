@@ -1,22 +1,3 @@
-// jshint -W033
-// jshint -W119
-// var k33g = new Gh3.User("BarlowProgramming"),
-//     userInfos = $("#user");
-//
-// k33g.fetch(function (err, resUser){
-//   if(err) {
-//     throw "ouch..."
-//   }
-//   console.log(k33g, resUser);
-//   _.each(_.keys(resUser), function (prop) {
-//     userInfos.append(
-//       $('<li>').append(prop+" : "+resUser[prop])
-//     );
-//   });
-// });
-
-alert("TESTING");
-
 var url = 'https://api.github.com/orgs/BarlowProgramming/members';
 $.get(url, function(users) {
   displayUsers(users)
