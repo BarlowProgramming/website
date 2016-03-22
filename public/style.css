@@ -171,6 +171,9 @@ div.ripple {
 div#container {
 	padding: 40px;
 }
+img#introductionImage {
+	position: absolute;
+}
 div#introduction {
 	position: relative;
 	width: calc(100% + 80px);

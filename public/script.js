@@ -151,6 +151,12 @@ var carousel = function(data) {
 	}
 	loadImage = function(id) {
 		$("img#introductionImage").attr("src", "img/carousel/" + id + ".png");
+		$("img#introductionImage").load(function() {
+			$(this).css({
+				top: ($("div#introduction").width()-$(this).width())/2,
+				left: ($("div#introduction").height()-$(this).height())/2
+			});
+		});
 		$("div#introductionText > h1").text(data[id].title);
 		$("div#introductionText > p").text(data[id].description);
 		$("div.carouselButton").removeClass("currentImage");
