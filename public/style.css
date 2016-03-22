@@ -27,6 +27,15 @@ body {
 	51%	{ color: #eeeeee; }
 	100% { color: #eeeeee; }
 }
+@keyframes loadAnimationFirstHalf {
+  0% { transform: rotate(0deg); opacity: 1; }
+  50% { transform: rotate(180deg); opacity: 0.5; }
+  100% { transform: rotate(180deg); opacity: 0; }
+}
+@keyframes loadAnimationSecondHalf {
+  from { transform: rotate(0deg); opacity: 0.5; }
+  to { transform: rotate(180deg); opacity: 0; }
+}
 
 /* other general tag styles */
 a {
@@ -198,18 +207,63 @@ div#introductionText > p {
 	text-align: center;
 }
 div.carouselButton {
-	width: 25px;
-	height: 25px;
+	width: 50px;
+	height: 50px;
 	border-radius: 100%;
-	background-color: white;
-	opacity: 0.5;
+	background-color: rgba(255, 255, 255, 0.5);
 	cursor: pointer;
 	position: absolute;
 	top: 25px;
 }
 div.carouselButton:hover {
-	opacity: 0.8;
+	opacity: 0.75;
 }
 div.carouselButton.currentImage {
-	opacity: 1;
+	background-color: transparent;
+}
+div.loadAnimation {
+  border-radius: 100%;
+}
+div.loadAnimationMask {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  clip: rect(0, 50px, 50px, 25px);
+}
+div.loadAnimationMask.left {
+  position: absolute;
+  clip: rect(0, 25px, 50px, 0);
+}
+div.loadAnimationFill {
+  width: 100%;
+  height: 100%;
+  background-color: darkgrey;
+  position: absolute;
+  clip: rect(0, 25px, 50px, 0);
+  animation: loadAnimationFirstHalf 5s linear 1 forwards;
+}
+div.loadAnimationFill.left {
+  position: absolute;
+  clip: rect(0, 50px, 50px, 25px);
+  animation: loadAnimationSecondHalf 2.5s linear 1 forwards;
+  animation-delay: 2.5s;
+}
+div.loadAnimationOuter {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  background-color: white;
+  transition: all .2s;
+  opacity: 0.5;
+}
+div.loadAnimationOuter:hover {
+  opacity: 0.9;
+}
+div.loadAnimationContent {
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+
 }

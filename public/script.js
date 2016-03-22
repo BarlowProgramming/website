@@ -139,7 +139,7 @@ var carousel = function(data) {
 		var carouselButton = $("<div>");
 		carouselButton.addClass("carouselButton").addClass("animate");
 		carouselButton.css({
-			left: "calc(50% - ((50px * " + numImgs + " - 25px) / 2) + 50px * " + i + ")"
+			left: "calc(50% - ((100px * " + numImgs + " - 50px) / 2) + 100px * " + i + ")"
 		});
 		carouselButton.click(function() {
 			loadImage(i);
@@ -159,9 +159,20 @@ var carousel = function(data) {
 		});
 		$("div#introductionText > h1").text(data[id].title);
 		$("div#introductionText > p").text(data[id].description);
-		$("div.carouselButton").removeClass("currentImage");
+		$("div.carouselButton").removeClass("currentImage").empty();
 		// jQuery doesn't support :nth-of-type() selector, so use 0-based :eq() instead
 		$("div.carouselButton:eq(" + id + ")").addClass("currentImage");
+		$("div.carouselButton:eq(" + id + ")").html(`
+			<div class="loadAnimation loadAnimationOuter">
+				<div class="loadAnimation loadAnimationMask right">
+					<div class="loadAnimation loadAnimationFill"></div>
+				</div>
+				<div class="loadAnimation loadAnimationMask left">
+					<div class="loadAnimation loadAnimationFill left"></div>
+				</div>
+				<div class="loadAnimation loadAnimationContent"></div>
+			</div>
+		`);
 	};
 	var currentImage = 0;
 	moveCarousel = function() {
