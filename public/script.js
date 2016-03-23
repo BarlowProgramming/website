@@ -151,7 +151,12 @@ var carousel = function(data) {
 		(new Image()).src = "/img/carousel/" + i + ".png";
 	}
 	loadImage = function(id) {
-		$("img#introductionImage").attr("src", "img/carousel/" + id + ".png");
+		$("img#introductionImage:not(:first)").remove();
+		var newImage = $("img#introductionImage:first").clone();
+		newImage.attr("src", "img/carousel/" + id + ".png");
+		$("img#introductionImage").before(newImage).animate({ opacity: 0 }, 500, function() {
+			$(this).remove();
+		});
 		$("img#introductionImage").load(function() {
 			$(this).css({
 				top: ($("div#introduction").width()-$(this).width())/2,
