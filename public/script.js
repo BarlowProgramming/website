@@ -148,6 +148,7 @@ var carousel = function(data) {
 			currentImage = i;
 		});
 		$("div#introduction").append(carouselButton);
+		(new Image()).src = "/img/carousel/" + i + ".png";
 	}
 	loadImage = function(id) {
 		$("img#introductionImage").attr("src", "img/carousel/" + id + ".png");
